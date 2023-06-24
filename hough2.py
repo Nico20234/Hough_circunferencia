@@ -23,19 +23,6 @@ for line in lines:
 # Aplicar la transformada de Hough para circunferencias
 circles = cv2.HoughCircles(edges, cv2.HOUGH_GRADIENT, dp=1, minDist=50, param1=100, param2=30, minRadius=20, maxRadius=100)
 
-# Dibujar las rectas detectadas en la imagen original
-for line in filtered_lines:
-    rho, theta = line[0]
-    a = np.cos(theta)
-    b = np.sin(theta)
-    x0 = a * rho
-    y0 = b * rho
-    x1 = int(x0 + 1000 * (-b))
-    y1 = int(y0 + 1000 * (a))
-    x2 = int(x0 - 1000 * (-b))
-    y2 = int(y0 - 1000 * (a))
-    cv2.line(image, (x1, y1), (x2, y2), (0, 0, 255), 2)
-
 # Dibujar las circunferencias detectadas en la imagen original
 if circles is not None:
     circles = np.round(circles[0, :]).astype(int)
